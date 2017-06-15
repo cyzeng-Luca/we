@@ -10785,7 +10785,7 @@ var createStyles = function createStyles() {
     var animationStyle = keyFramePrefix + 'animation: 1ms ' + RESIZE_ANIMATION_NAME + ';';
 
     // opacity: 0 works around a chrome bug https://code.google.com/p/chromium/issues/detail?id=286360
-    var css = animationKeyframes + '\n      .resize-triggers { ' + animationStyle + ' visibility: hidden; opacity: 0; }\n      .resize-triggers, .resize-triggers > div, .contract-trigger:before { content: " "; display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; }\n      .resize-triggers > div { background: #eee; overflow: auto; }\n      .contract-trigger:before { width: 200%; height: 200%; }';
+    var css = animationKeyframes + '\n      .resize-triggers { ' + animationStyle + ' visibility: hidden; opacity: 0; }\n      .resize-triggers, .resize-triggers > div, .contract-trigger:before { content: " "; display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; z-index: -1 }\n      .resize-triggers > div { background: #eee; overflow: auto; }\n      .contract-trigger:before { width: 200%; height: 200%; }';
 
     var head = document.head || document.getElementsByTagName('head')[0];
     var style = document.createElement('style');
@@ -14983,7 +14983,7 @@ module.exports =
 	};
 
 	module.exports = {
-	  version: '1.3.5',
+	  version: '1.3.6',
 	  locale: _locale2.default.use,
 	  i18n: _locale2.default.i18n,
 	  install: install,
@@ -15380,9 +15380,8 @@ module.exports =
 	              on: {
 	                'change': this.handleChange,
 	                'focus': this.handleFocus
-	              },
-
-	              style: { width: '30px' } },
+	              }
+	            },
 	            []
 	          ), this.t('el.pagination.pageClassifier')]
 	        );
@@ -16175,6 +16174,15 @@ module.exports =
 	  },
 
 	  props: {
+	    props: {
+	      type: Object,
+	      default: function _default() {
+	        return {
+	          label: 'value',
+	          value: 'value'
+	        };
+	      }
+	    },
 	    popperClass: String,
 	    placeholder: String,
 	    disabled: Boolean,
@@ -16265,7 +16273,7 @@ module.exports =
 	    select: function select(item) {
 	      var _this3 = this;
 
-	      this.$emit('input', item.value);
+	      this.$emit('input', item[this.props.value]);
 	      this.$emit('select', item);
 	      this.$nextTick(function (_) {
 	        _this3.suggestions = [];
@@ -16307,6 +16315,7 @@ module.exports =
 	    this.$refs.suggestions.$destroy();
 	  }
 	}; //
+	//
 	//
 	//
 	//
@@ -16406,6 +16415,7 @@ module.exports =
 
 
 	  props: {
+	    props: Object,
 	    suggestions: Array,
 	    options: {
 	      default: function _default() {
@@ -16534,7 +16544,7 @@ module.exports =
 	          _vm.select(item)
 	        }
 	      }
-	    }, [_vm._v("\n          " + _vm._s(item.value) + "\n        ")]) : _c(_vm.parent.customItem, {
+	    }, [_vm._v("\n          " + _vm._s(item[_vm.props.label]) + "\n        ")]) : _c(_vm.parent.customItem, {
 	      tag: "component",
 	      class: {
 	        'highlighted': _vm.parent.highlightedIndex === index
@@ -16607,6 +16617,7 @@ module.exports =
 	    ref: "suggestions",
 	    class: [_vm.popperClass ? _vm.popperClass : ''],
 	    attrs: {
+	      "props": _vm.props,
 	      "suggestions": _vm.suggestions
 	    }
 	  })], 1)
@@ -16911,7 +16922,9 @@ module.exports =
 	  created: function created() {
 	    var _this = this;
 
-	    this.$on('updatePopper', this.updatePopper);
+	    this.$on('updatePopper', function () {
+	      if (_this.showPopper) _this.updatePopper();
+	    });
 	    this.$on('visible', function (val) {
 	      _this.showPopper = val;
 	    });
@@ -20808,9 +20821,13 @@ module.exports =
 	  },
 
 	  mounted: function mounted() {
+	    var _this = this;
+
 	    this.referenceElm = this.$parent.$refs.reference.$el;
 	    this.$parent.popperElm = this.popperElm = this.$el;
-	    this.$on('updatePopper', this.updatePopper);
+	    this.$on('updatePopper', function () {
+	      if (_this.$parent.visible) _this.updatePopper();
+	    });
 	    this.$on('destroyPopper', this.destroyPopper);
 	  }
 	}; //
@@ -25625,9 +25642,10 @@ module.exports =
 	    handleKeydown: function handleKeydown(event) {
 	      var keyCode = event.keyCode;
 
-	      // tab
-	      if (keyCode === 9) {
+	      // TAB or ESC
+	      if (keyCode === 9 || keyCode === 27) {
 	        this.pickerVisible = false;
+	        event.stopPropagation();
 	      }
 	    },
 	    hidePicker: function hidePicker() {
@@ -26057,7 +26075,7 @@ module.exports =
 	        this.date = newVal;
 	        this.year = newVal.getFullYear();
 	        this.month = newVal.getMonth();
-	        this.$emit('pick', newVal, true);
+	        this.$emit('pick', newVal, false);
 	      }
 	    },
 	    timePickerVisible: function timePickerVisible(val) {
@@ -27482,9 +27500,7 @@ module.exports =
 
 	var clearHours = function clearHours(time) {
 	  var cloneDate = new Date(time);
-	  var timeZoneOffset = cloneDate.getTimezoneOffset();
-	  var timeZone = timeZoneOffset >= 0 ? 24 - timeZoneOffset / 60 : Math.abs(timeZoneOffset) / 60;
-	  cloneDate.setHours(timeZone, 0, 0, 0);
+	  cloneDate.setHours(0, 0, 0, 0);
 	  return cloneDate.getTime();
 	};
 
@@ -40354,7 +40370,7 @@ module.exports =
 	    h /= 6;
 	  }
 
-	  return { h: Math.round(h * 360), s: Math.round(s * 100), v: Math.round(v * 100) };
+	  return { h: h * 360, s: s * 100, v: v * 100 };
 	};
 
 	// `hsvToRgb`
@@ -40746,8 +40762,16 @@ module.exports =
 	    }
 	  },
 
+	  computed: {
+	    colorValue: function colorValue() {
+	      var hue = this.color.get('hue');
+	      var value = this.color.get('value');
+	      return { hue: hue, value: value };
+	    }
+	  },
+
 	  watch: {
-	    'color.value': function colorValue() {
+	    colorValue: function colorValue() {
 	      this.update();
 	    }
 	  },
@@ -40960,8 +40984,15 @@ module.exports =
 	  },
 
 
+	  computed: {
+	    hueValue: function hueValue() {
+	      var hue = this.color.get('hue');
+	      return hue;
+	    }
+	  },
+
 	  watch: {
-	    'color.value': function colorValue() {
+	    hueValue: function hueValue() {
 	      this.update();
 	    }
 	  },
@@ -57743,26 +57774,22 @@ var ord = encode.ord = function ord (c) {
 /* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
-    if (true) {
-        !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
-				__WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-    } else if (typeof exports === 'object') {
-        module.exports = factory();
-    } else {
-        root.deepmerge = factory();
-    }
-}(this, function () {
+"use strict";
 
-function isMergeableObject(val) {
-    var nonNullObject = val && typeof val === 'object'
 
-    return nonNullObject
-        && Object.prototype.toString.call(val) !== '[object RegExp]'
-        && Object.prototype.toString.call(val) !== '[object Date]'
+var index$2 = function isMergeableObject(value) {
+	return isNonNullObject(value) && isNotSpecial(value)
+};
+
+function isNonNullObject(value) {
+	return !!value && typeof value === 'object'
+}
+
+function isNotSpecial(value) {
+	var stringValue = Object.prototype.toString.call(value);
+
+	return stringValue !== '[object RegExp]'
+		&& stringValue !== '[object Date]'
 }
 
 function emptyTarget(val) {
@@ -57770,45 +57797,45 @@ function emptyTarget(val) {
 }
 
 function cloneIfNecessary(value, optionsArgument) {
-    var clone = optionsArgument && optionsArgument.clone === true
-    return (clone && isMergeableObject(value)) ? deepmerge(emptyTarget(value), value, optionsArgument) : value
+    var clone = optionsArgument && optionsArgument.clone === true;
+    return (clone && index$2(value)) ? deepmerge(emptyTarget(value), value, optionsArgument) : value
 }
 
 function defaultArrayMerge(target, source, optionsArgument) {
-    var destination = target.slice()
+    var destination = target.slice();
     source.forEach(function(e, i) {
         if (typeof destination[i] === 'undefined') {
-            destination[i] = cloneIfNecessary(e, optionsArgument)
-        } else if (isMergeableObject(e)) {
-            destination[i] = deepmerge(target[i], e, optionsArgument)
+            destination[i] = cloneIfNecessary(e, optionsArgument);
+        } else if (index$2(e)) {
+            destination[i] = deepmerge(target[i], e, optionsArgument);
         } else if (target.indexOf(e) === -1) {
-            destination.push(cloneIfNecessary(e, optionsArgument))
+            destination.push(cloneIfNecessary(e, optionsArgument));
         }
-    })
+    });
     return destination
 }
 
 function mergeObject(target, source, optionsArgument) {
-    var destination = {}
-    if (isMergeableObject(target)) {
-        Object.keys(target).forEach(function (key) {
-            destination[key] = cloneIfNecessary(target[key], optionsArgument)
-        })
+    var destination = {};
+    if (index$2(target)) {
+        Object.keys(target).forEach(function(key) {
+            destination[key] = cloneIfNecessary(target[key], optionsArgument);
+        });
     }
-    Object.keys(source).forEach(function (key) {
-        if (!isMergeableObject(source[key]) || !target[key]) {
-            destination[key] = cloneIfNecessary(source[key], optionsArgument)
+    Object.keys(source).forEach(function(key) {
+        if (!index$2(source[key]) || !target[key]) {
+            destination[key] = cloneIfNecessary(source[key], optionsArgument);
         } else {
-            destination[key] = deepmerge(target[key], source[key], optionsArgument)
+            destination[key] = deepmerge(target[key], source[key], optionsArgument);
         }
-    })
+    });
     return destination
 }
 
 function deepmerge(target, source, optionsArgument) {
     var array = Array.isArray(source);
-    var options = optionsArgument || { arrayMerge: defaultArrayMerge }
-    var arrayMerge = options.arrayMerge || defaultArrayMerge
+    var options = optionsArgument || { arrayMerge: defaultArrayMerge };
+    var arrayMerge = options.arrayMerge || defaultArrayMerge;
 
     if (array) {
         return Array.isArray(target) ? arrayMerge(target, source, optionsArgument) : cloneIfNecessary(source, optionsArgument)
@@ -57826,11 +57853,11 @@ deepmerge.all = function deepmergeAll(array, optionsArgument) {
     return array.reduce(function(prev, next) {
         return deepmerge(prev, next, optionsArgument)
     })
-}
+};
 
-return deepmerge
+var index = deepmerge;
 
-}));
+module.exports = index;
 
 
 /***/ }),
@@ -61786,9 +61813,13 @@ module.exports =
 	  },
 
 	  mounted: function mounted() {
+	    var _this = this;
+
 	    this.referenceElm = this.$parent.$refs.reference.$el;
 	    this.$parent.popperElm = this.popperElm = this.$el;
-	    this.$on('updatePopper', this.updatePopper);
+	    this.$on('updatePopper', function () {
+	      if (_this.$parent.visible) _this.updatePopper();
+	    });
 	    this.$on('destroyPopper', this.destroyPopper);
 	  }
 	}; //

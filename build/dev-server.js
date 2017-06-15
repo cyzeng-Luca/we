@@ -1,9 +1,5 @@
 var webpack = require('webpack');
-var webpackConfig = require('./webpack.dev.conf');
-console.log('-------------')
-console.log(webpackConfig)
-console.log(webpack)
-console.log('-------------')
+var webpackConfig = require('./webpack.pro.conf');
 webpack(webpackConfig,function(){
-
-})
+  console.log(1)
+});
