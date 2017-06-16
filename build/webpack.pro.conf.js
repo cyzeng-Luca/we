@@ -1,6 +1,8 @@
 //引用相关依赖
 var path = require('path');
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
 //设置变量
 var ROOT_PATH = path.resolve(__dirname,'../');
 var SRC_PATH = path.resolve(ROOT_PATH,'src');
@@ -17,11 +19,36 @@ module.exports = {
   output: {
     path: BUILD_DIST,
     publicPath: 'test',
-    filename: '[name].[chunkhash].js'
-    // publicPath:"dist/", //给require.ensure用
-    // chunkFilename: "[name].chunk.js"//给require.ensure用
+    filename: 'js/[name].[chunkhash].js',
+    publicPath:"/", //给require.ensure用
+    chunkFilename: "js/[name].[chunkhash].js"//给require.ensure用
+  },
+  module:{
+    loaders: [
+      {
+        test: /\.vue$/,
+        loader: "vue-loader",
+        include: SRC_PATH
+      },
+      {
+        test: /\.js$/,
+        loader: "babel-loader",
+        include: [ path.join(ROOT_PATH,'/main.js'), SRC_PATH ]
+      }
+    ]
   },
   resolve: {
-     extensions: [' ','.js','.vue','.json']
-  }
+     extensions: ['.js','.vue','.json'],
+     alias: {
+      'Root': ROOT_PATH,
+      'Src': SRC_PATH,
+      'Login': path.join(SRC_PATH, '/view/login')
+     }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: ROOT_PATH + '/index.html',
+      inject: 'body'
+    })
+  ]
 }
