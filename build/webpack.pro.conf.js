@@ -11,6 +11,7 @@ var BUILD_DIST = path.resolve(ROOT_PATH,'dist');
 
 
 module.exports = {
+
   //打包入口 也可直接用文件夹名字，默认找index.js
   entry: {
     'app': path.join(ROOT_PATH,'/main.js'),
@@ -18,9 +19,8 @@ module.exports = {
   //输出文件名
   output: {
     path: BUILD_DIST,
-    publicPath: 'test',
-    filename: 'js/[name].[chunkhash].js',
-    publicPath:"/", //给require.ensure用
+    filename: 'js/[name].[hash].js',
+    publicPath: "/", //给require.ensure用
     chunkFilename: "js/[name].[chunkhash].js"//给require.ensure用
   },
   module:{

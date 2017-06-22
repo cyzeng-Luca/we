@@ -31,13 +31,10 @@ const router = new VueRouter(
     routes
   }
 );
-
-var app = new Vux({
-  $el: 'app',
+console.log(1111111111)
+console.log(routes)
+const app = new Vue({
+  el: '#app',
   router,
-  template: '<App/>',
-  components: {
-    App
-  }
-
+  render: h => h(App)
 });

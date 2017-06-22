@@ -29,7 +29,7 @@
 /******/
 /******/ 	// objects to store loaded and loading chunks
 /******/ 	var installedChunks = {
-/******/ 		1: 0
+/******/ 		2: 0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -86,7 +86,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "js/" + ({"0":"Login"}[chunkId]||chunkId) + "." + {"0":"022772f68d43f061f44e"}[chunkId] + ".js";
+/******/ 		script.src = __webpack_require__.p + "js/" + ({"0":"test","1":"Login"}[chunkId]||chunkId) + "." + {"0":"52a9c5a4d48486523124","1":"c51cdc248d86ffd383e6"}[chunkId] + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {
@@ -139,7 +139,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "dist";
+/******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// on error function for async loading
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
@@ -57562,8 +57562,13 @@ var app = new Vux({
  */
 
 var login = function login(r) {
-  return __webpack_require__.e/* require.ensure */(0).then((function (r) {
+  return __webpack_require__.e/* require.ensure */(1).then((function (r) {
     return r(__webpack_require__(105));
+  }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+};
+var test = function test(r) {
+  return __webpack_require__.e/* require.ensure */(0).then((function (r) {
+    return r(__webpack_require__(106));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 

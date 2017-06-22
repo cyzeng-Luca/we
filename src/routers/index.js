@@ -7,6 +7,5 @@
 import loginRoutes from './loginRoutes'
 
 
-export default [
-  loginRoutes
-]
+export default  loginRoutes
+

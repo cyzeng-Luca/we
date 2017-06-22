@@ -21,7 +21,19 @@ module.exports = {
     // publicPath:"dist/", //给require.ensure用
     // chunkFilename: "[name].chunk.js"//给require.ensure用
   },
+  module:{
+    loaders: [
+      {
+        test: /\.vue$/,
+        loader: "vue-loader"
+      },
+      {
+        test: /\.js$/,
+        loader: "babel-loader"
+      }
+    ]
+  },
   resolve: {
-     extensions: [' ','.js','.vue','.json']
+    extensions: ['.js','.vue','.json']
   }
 }
