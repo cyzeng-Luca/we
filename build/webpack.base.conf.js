@@ -1,6 +1,8 @@
-//引用相关依赖
+//引入相关依赖
 var path = require('path');
-var webpack = require('webpack');
+//路径为文件夹，自动引入index文件
+var config = require('../config');
+
 //设置变量
 var ROOT_PATH = path.resolve(__dirname,'../');
 var SRC_PATH = path.resolve(ROOT_PATH,'src');
@@ -8,32 +10,53 @@ var BUILD_PATH = path.resolve(ROOT_PATH,'build');
 var BUILD_DIST = path.resolve(ROOT_PATH,'dist');
 
 
+
 module.exports = {
-  //打包入口 也可直接用文件夹名字，默认找index.js
   entry: {
-    'app': path.join(ROOT_PATH,'/main.js'),
+    app: path.join(ROOT_PATH,'/main.js'),
   },
-  //输出文件名
   output: {
-    path: BUILD_DIST,
-    publicPath: 'test',
-    filename: '[name].[chunkhash].js'
-    // publicPath:"dist/", //给require.ensure用
-    // chunkFilename: "[name].chunk.js"//给require.ensure用
+    path: config.build.assetsRoot,
+    filename: 'js/[name].[hash].js',
+    publicPath: process.env.NODE_ENV === 'production' ?
+      config.build.assetsPublicPath : config.dev.assetsPublicPath
   },
   module:{
     loaders: [
       {
         test: /\.vue$/,
-        loader: "vue-loader"
+        loader: "vue-loader",
+        include: SRC_PATH
       },
       {
         test: /\.js$/,
-        loader: "babel-loader"
+        loader: "babel-loader",
+        include: [ path.join(ROOT_PATH,'/main.js'), SRC_PATH ]
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'url-loader',
+        query: {
+          limit: 10000,
+          name: utils.assetsPath('img/[name].[hash:7].[ext]')
+        }
+      },
+      {
+        test: /\.(woff2|eot|ttf|otf)$/,
+        loader: 'url-loader',
+        query: {
+          limit: 10000,
+          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+        }
       }
     ]
   },
   resolve: {
-    extensions: ['.js','.vue','.json']
+    extensions: ['.js', '.vue', '.json'],
+    alias: {
+      'Root': ROOT_PATH,
+      'Src': SRC_PATH,
+      'Login': path.join(SRC_PATH, '/view/login')
+    }
   }
 }

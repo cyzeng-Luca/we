@@ -11,6 +11,7 @@ var BUILD_DIST = path.resolve(ROOT_PATH,'dist');
 
 
 module.exports = {
+
   //打包入口 也可直接用文件夹名字，默认找index.js
   entry: {
     'app': path.join(ROOT_PATH,'/main.js'),
