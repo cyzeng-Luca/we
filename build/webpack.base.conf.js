@@ -65,7 +65,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: ROOT_PATH + '/index.html',
       inject: 'body'
-    }),
-    new webpack.HotModuleReplacementPlugin()
+    })
   ]
 }
