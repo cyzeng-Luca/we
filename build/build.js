@@ -1,10 +1,14 @@
 //设置全局变量
 process.env.NODE_ENV = 'production';
-
 //引入相关依赖
 var path = require('path');
 var webpack = require('webpack');
 var webpackConfig = require('./webpack.pro.conf');
+
+
+
+console.log(webpackConfig)
+
 //路径为文件夹，自动引入index文件
 var config = require('../config');
 //删除模块，可以在打包的时候删除原来dist中的文件
@@ -36,15 +40,4 @@ rm(path.join(config.build.assetsRoot,config.build.assetsSubDirectory),function(e
   });
   console.log(chalk.cyan('Build complete.\n'))
 })
-
-
-
-
-
-
-
-var ROOT_PATH = path.resolve(__dirname,'../');
-var SRC_PATH = path.resolve(ROOT_PATH,'src');
-var BUILD_PATH = path.resolve(ROOT_PATH,'build');
-var BUILD_DIST = path.resolve(ROOT_PATH,'dist');
 

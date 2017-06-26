@@ -2,6 +2,9 @@
 var webpack = require('webpack');
 var webpackDevServer = require("webpack-dev-server");
 var webpackConfig = require('./webpack.dev.conf');
+//路径为文件夹，自动引入index文件
+var config = require('../config');
+
 var opn = require('opn');
 
 var compiler = webpack(webpackConfig);
@@ -13,7 +16,7 @@ var compiler = webpack(webpackConfig);
 
 
 // var uri = 'http://localhost:' + port;
-var uri = 'http://localhost:' + 9999;
+var uri = 'http://localhost:' + config.dev.port;
 
 var server = new webpackDevServer(compiler,{
   hot: true,
