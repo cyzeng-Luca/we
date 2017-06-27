@@ -1,13 +1,13 @@
-webpackJsonp([1],{
+webpackJsonp([0],{
 
-/***/ 105:
+/***/ 224:
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(45)(
+var Component = __webpack_require__(161)(
   /* script */
-  __webpack_require__(107),
+  __webpack_require__(226),
   /* template */
-  __webpack_require__(109),
+  __webpack_require__(228),
   /* styles */
   null,
   /* scopeId */
@@ -21,7 +21,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 107:
+/***/ 226:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46,7 +46,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
   data: function data() {
     return {
-      message: '12132123'
+      message: 'dddddd'
     };
   },
   mounted: function mounted() {
@@ -56,7 +56,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 109:
+/***/ 228:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

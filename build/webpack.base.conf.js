@@ -2,6 +2,8 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var CopyWebpackPlugin = require("copy-webpack-plugin");
 //路径为文件夹，自动引入index文件
 var config = require('../config');
 var utils = require('./utils')
@@ -15,7 +17,8 @@ module.exports = {
 
   //打包入口 也可直接用文件夹名字，默认找index.js
   entry: {
-    app: path.join(ROOT_PATH,'/main.js'),
+    app:  path.join(ROOT_PATH,'/main.js')
+    // vendor: path.join(SRC_PATH,'/assets/vendor.js')
   },
   output: {
     path: config.build.assetsRoot,
@@ -33,6 +36,12 @@ module.exports = {
         test: /\.js$/,
         loader: "babel-loader",
         include: [ path.join(ROOT_PATH,'/main.js'), SRC_PATH ]
+      },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          use: "css-loader"
+        })
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -64,7 +73,42 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: ROOT_PATH + '/index.html',
-      inject: 'body'
-    })
+      inject: 'body',
+      minify: {
+        removeComments: true,//移除注释
+        // collapseWhitespace: true,//折叠空白
+        removeAttributeQuotes: true//移除双引号
+      },
+      chunksSortMode: 'dependency'//排序方式
+    }),
+    new ExtractTextPlugin({
+      filename:'static/css/app.css', //命名打包Css文件
+      allChunks:true //所有模块css打包
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor' ,// 指定公共 bundle 的名字。
+      filename: 'static/js/commons.[chunkhash].js',   // 公共chunk的文件名
+      minChunks: function (module) { //遇到css文件，不提取公共模块，因为已经使用ExtractTextPlugin
+        if(module.resource && (/^.*\.(css|scss|less)$/).test(module.resource)) {
+          return false;
+        }
+
+        return module.context && module.context.indexOf("node_modules") !== -1;
+      },
+      // children: true,
+      // async: true
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest',   //提取webpack Runtime的辅助代码，防止common代码hash改变，使缓存失效
+      chunks: ['vendor'], //指定入口提取模块的公共模块
+      minChunks: Infinity //立马生成模块
+    }),
+    new CopyWebpackPlugin([//复制static文件到生产目录
+      {
+        from: path.resolve(__dirname, '../static'),
+        to: config.build.assetsSubDirectory,
+        ignore: ['.*']
+      }
+    ])
   ]
 }

@@ -18,6 +18,7 @@
       }
     },
     mounted(){
+      console.log($)
       console.log('success')
     }
   }

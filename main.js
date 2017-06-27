@@ -31,10 +31,14 @@ const router = new VueRouter(
     routes
   }
 );
-console.log(1111111111)
+console.log(1899999921054069811)
 console.log(routes)
 const app = new Vue({
   el: '#app',
   router,
   render: h => h(App)
 });
+
+
+var moment = require('moment');
+console.log(moment().format());
