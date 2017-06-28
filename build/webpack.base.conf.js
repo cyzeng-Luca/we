@@ -17,8 +17,8 @@ module.exports = {
 
   //打包入口 也可直接用文件夹名字，默认找index.js
   entry: {
-    app:  path.join(ROOT_PATH,'/main.js')
-    // vendor: path.join(SRC_PATH,'/assets/vendor.js')
+    app:  path.join(ROOT_PATH,'/main.js'),
+    css: path.join(SRC_PATH,'/assets/vendor.js')
   },
   output: {
     path: config.build.assetsRoot,

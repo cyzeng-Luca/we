@@ -10,7 +10,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _loginRoutes = __webpack_require__(185);
+var _loginRoutes = __webpack_require__(187);
 
 var _loginRoutes2 = _interopRequireDefault(_loginRoutes);
 
@@ -24,14 +24,14 @@ exports.default = _loginRoutes2.default; /**
 
 /***/ }),
 
-/***/ 158:
+/***/ 159:
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(161)(
+var Component = __webpack_require__(162)(
   /* script */
   null,
   /* template */
-  __webpack_require__(220),
+  __webpack_require__(222),
   /* styles */
   null,
   /* scopeId */
@@ -45,7 +45,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 184:
+/***/ 185:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55,11 +55,11 @@ var _vue = __webpack_require__(3);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vuex = __webpack_require__(160);
+var _vuex = __webpack_require__(161);
 
 var _vuex2 = _interopRequireDefault(_vuex);
 
-var _vueRouter = __webpack_require__(159);
+var _vueRouter = __webpack_require__(160);
 
 var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
@@ -67,15 +67,15 @@ var _elementUi = __webpack_require__(155);
 
 var _elementUi2 = _interopRequireDefault(_elementUi);
 
-var _pace = __webpack_require__(157);
+var _pace = __webpack_require__(158);
 
 var _pace2 = _interopRequireDefault(_pace);
 
-var _jquery = __webpack_require__(156);
+var _jquery = __webpack_require__(157);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _App = __webpack_require__(158);
+var _App = __webpack_require__(159);
 
 var _App2 = _interopRequireDefault(_App);
 
@@ -120,7 +120,7 @@ console.log(moment().format());
 
 /***/ }),
 
-/***/ 185:
+/***/ 187:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -140,13 +140,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var login = function login(r) {
   return __webpack_require__.e/* require.ensure */(1).then((function () {
-    return r(__webpack_require__(223));
+    return r(__webpack_require__(225));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 
 var test = function test(r) {
   return __webpack_require__.e/* require.ensure */(0).then((function () {
-    return r(__webpack_require__(224));
+    return r(__webpack_require__(226));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 
@@ -160,7 +160,7 @@ exports.default = [{
 
 /***/ }),
 
-/***/ 220:
+/***/ 222:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -181,11 +181,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ }),
 
-/***/ 222:
+/***/ 224:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ })
 
-},[184]);
+},[185]);
