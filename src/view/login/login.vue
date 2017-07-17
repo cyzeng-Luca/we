@@ -14,7 +14,7 @@
   export default {
     data(){
       return {
-        message: '12132123'
+        message: 'fdsfsd'
       }
     },
     mounted(){

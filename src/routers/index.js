@@ -8,6 +8,6 @@ import loginRoutes from './loginRoutes'
 import mainRoutes from './mainRoutes'
 
 
-export default  [mainRoutes];
+export default  [...loginRoutes, ...mainRoutes];
 
 
