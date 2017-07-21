@@ -4,7 +4,7 @@
  * @Description: 登录路由
  */
 
-const login = r => require.ensure( [], () => r(require('Login/login')), 'Login');
+const login = r => require.ensure( [], () => r(require('@Src/view/login/login')), 'Login');
 
 export default [
   {

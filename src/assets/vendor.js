@@ -1,5 +1,7 @@
-//引入样式文件
-import './css/test.css';
+// 引入样式文件
+import 'element-ui/lib/theme-default/index.css';
 
-var moment = require('moment');
-console.log(moment().format());
+
+// font样式
+import './css/style.css';
+

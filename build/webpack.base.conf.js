@@ -52,7 +52,7 @@ module.exports = {
         }
       },
       {
-        test: /\.(woff2|eot|ttf|otf)$/,
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
         loader: 'url-loader',
         query: {
           limit: 10000,
@@ -65,10 +65,7 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.common.js',
-      'Root': ROOT_PATH,
-      'Src': SRC_PATH,
-      'View': path.join(SRC_PATH, '/view/'),
-      'Login': path.join(SRC_PATH, '/view/login')
+      '@Src': SRC_PATH,
     }
   },
   plugins: [

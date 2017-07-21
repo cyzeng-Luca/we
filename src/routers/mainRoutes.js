@@ -5,7 +5,7 @@
  */
 
 
-const main = r => require.ensure( [], () => r(require('View/main')), 'Main');
+const main = r => require.ensure( [], () => r(require('@Src/view/main')), 'Main');
 // const test = r => require.ensure( [], () => r(require('Login/test')), 'Test');
 
 // export default [{

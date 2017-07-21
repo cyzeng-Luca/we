@@ -5,9 +5,6 @@
  -->
 <template>
   <div id="vueRouter">
-    <h1>Hello App!</h1>
-    <router-link to="/login">Go to first</router-link>
-    <router-link to="/test">Go to second</router-link>
     <router-view></router-view>
   </div>
 </template>

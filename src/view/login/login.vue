@@ -6,20 +6,20 @@
 
 <template>
   <div>
-    <h1>{{ message }}</h1>
+    <h1>4154545</h1>
+    <h1>{{this.$store.state.login.age}}</h1>
   </div>
 </template>
 
 <script>
   export default {
     data(){
-      return {
-        message: 'fdsfsd'
+      return{
+        message: 5
       }
     },
     mounted(){
-      console.log($)
-      console.log('success')
+      console.log(3)
     }
   }
 </script>

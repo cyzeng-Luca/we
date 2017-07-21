@@ -9,5 +9,3 @@ import mainRoutes from './mainRoutes'
 
 
 export default  [...loginRoutes, ...mainRoutes];
-
-
