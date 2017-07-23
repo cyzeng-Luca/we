@@ -9,6 +9,7 @@ const login = r => require.ensure( [], () => r(require('@Src/view/login/login'))
 export default [
   {
     path: '/login',
+    name: 'sss',
     component: login
   }
 ]
