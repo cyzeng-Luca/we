@@ -26,8 +26,7 @@ module.exports = {
       config.build.assetsPublicPath : config.dev.assetsPublicPath,//给require.ensure用
   },
   module:{
-    loaders: [
-      {
+    loaders: [{
         test: /\.vue$/,
         loader: "vue-loader",
         include: SRC_PATH
@@ -41,6 +40,19 @@ module.exports = {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           use: "css-loader"
+        })
+      },
+      {
+        test: /\.less$/,
+        use: ExtractTextPlugin.extract({
+          use: [
+            {
+              loader: "css-loader"
+            },
+            {
+              loader: "less-loader"
+            }
+          ]
         })
       },
       {
@@ -62,7 +74,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json','.less','.scss'],
     alias: {
       'vue$': 'vue/dist/vue.common.js',
       '@Src': SRC_PATH,

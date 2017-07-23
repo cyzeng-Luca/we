@@ -31,6 +31,21 @@ const router = new VueRouter({
 
 
 
+<<<<<<< HEAD
+=======
+//设置全局变量
+window.$ = $;
+window.Pace = pace;
+
+//引入路由
+const router = new VueRouter(
+  {
+    linkActiveClass: 'red',
+    routes
+  }
+);
+
+>>>>>>> 20170723
 const app = new Vue({
   el: '#app',
   store,
