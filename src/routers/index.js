@@ -5,7 +5,7 @@
  */
 
 import loginRoutes from './loginRoutes'
-import mainRoutes from './mainRoutes'
 
 
-export default  [...loginRoutes, ...mainRoutes];
+
+export default loginRoutes;

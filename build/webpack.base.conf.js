@@ -2,7 +2,6 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 //路径为文件夹，自动引入index文件
 var config = require('../config');
@@ -26,7 +25,7 @@ module.exports = {
       config.build.assetsPublicPath : config.dev.assetsPublicPath,//给require.ensure用
   },
   module:{
-    loaders: [{
+    rules: [{
         test: /\.vue$/,
         loader: "vue-loader",
         include: SRC_PATH
@@ -35,25 +34,6 @@ module.exports = {
         test: /\.js$/,
         loader: "babel-loader",
         include: [ path.join(ROOT_PATH,'/main.js'), SRC_PATH ]
-      },
-      {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          use: "css-loader"
-        })
-      },
-      {
-        test: /\.less$/,
-        use: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: "css-loader"
-            },
-            {
-              loader: "less-loader"
-            }
-          ]
-        })
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -78,6 +58,9 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.common.js',
       '@Src': SRC_PATH,
+      '@Components': path.join(SRC_PATH, 'components'),
+      '@Util': path.join(SRC_PATH, 'util'),
+      '@View': path.join(SRC_PATH, 'view')
     }
   },
   plugins: [
@@ -86,14 +69,9 @@ module.exports = {
       inject: 'body',
       minify: {
         removeComments: true,//移除注释
-        // collapseWhitespace: true,//折叠空白
         removeAttributeQuotes: true//移除双引号
       },
       chunksSortMode: 'dependency'//排序方式
-    }),
-    new ExtractTextPlugin({
-      filename:'static/css/app.css', //命名打包Css文件
-      allChunks:true //所有模块css打包
     })
   ]
 }

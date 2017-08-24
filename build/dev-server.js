@@ -9,13 +9,7 @@ var opn = require('opn');
 
 var compiler = webpack(webpackConfig);
 
-//用来测试热加载
-// console.log(11111111111111111)
-// console.log(module)
 
-
-
-// var uri = 'http://localhost:' + port;
 var uri = 'http://localhost:' + config.dev.port;
 
 var server = new webpackDevServer(compiler,{
@@ -23,9 +17,22 @@ var server = new webpackDevServer(compiler,{
   inline: true,
   stats: {
     colors: true,
+    modules: false,
+    children: false,
+    chunks: false,
+    chunkModules: false
+  },
+  // 设置转发
+  proxy: {
+    '/api': {
+      target: "http://192.168.0.0:8080",
+      changeOrigin: true,
+      pathRewrite: {
+        '^/api': ''
+      }
+    }
   }
 });
-
 
 server.listen(9999,'localhost',function(error){
   if(error){

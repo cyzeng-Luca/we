@@ -4,7 +4,6 @@
  * @Description: 路由跳转
  -->
 <template>
-  <div id="vueRouter">
-    <router-view></router-view>
-  </div>
+  <router-view></router-view>
 </template>
+

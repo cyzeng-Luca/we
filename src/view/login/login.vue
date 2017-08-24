@@ -1,25 +1,15 @@
 <!--
  * @Author:      cyzeng
  * @DateTime:    2017-06-16 23:09:45
- * @Description: 登录页面
+ * @Description: login
  -->
-
 <template>
-  <div>
-    <h1>4154545</h1>
-    <h1>{{this.$store.state.login.age}}</h1>
+  <div class="login">
+    <span>dev environment success</span>
   </div>
 </template>
 
 <script>
-  export default {
-    data(){
-      return{
-        message: 5
-      }
-    },
-    mounted(){
-      console.log(3)
-    }
-  }
+
+  export default {}
 </script>

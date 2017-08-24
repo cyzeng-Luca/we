@@ -4,12 +4,13 @@
  * @Description: 登录路由
  */
 
-const login = r => require.ensure( [], () => r(require('@Src/view/login/login')), 'Login');
+const login = r => require.ensure( [], () => r(require('@Src/view/login/login')), 'login');
+
 
 export default [
   {
-    path: '/login',
-    name: 'sss',
+    path: '/',
+    name: 'login',
     component: login
   }
 ]

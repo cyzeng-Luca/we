@@ -5,10 +5,6 @@ var path = require('path');
 var webpack = require('webpack');
 var webpackConfig = require('./webpack.pro.conf');
 
-
-
-console.log(webpackConfig)
-
 //路径为文件夹，自动引入index文件
 var config = require('../config');
 //删除模块，可以在打包的时候删除原来dist中的文件
@@ -38,6 +34,5 @@ rm(path.join(config.build.assetsRoot,config.build.assetsSubDirectory),function(e
       chunkModules: false
     }) + '\n\n');
   });
-  console.log(chalk.cyan('Build complete.\n'))
 })
 
